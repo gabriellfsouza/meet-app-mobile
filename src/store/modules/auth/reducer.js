@@ -33,7 +33,7 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
       case '@auth/SIGN_FAILURE': {
-        draft.loading = INITIAL_STATE;
+        draft.loading = INITIAL_STATE.loading;
         break;
       }
       default:

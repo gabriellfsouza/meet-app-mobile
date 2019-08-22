@@ -1,9 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -16,13 +18,21 @@ import {
 } from './styles';
 
 export default function SignUp({ navigation }) {
+  const dispatch = useDispatch();
+
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  useEffect(() => nameRef.current.focus(), []);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    dispatch(signUpRequest(name, email, password));
+  }
+
+  useEffect(() => nameRef.current.focus(), []);
 
   return (
     <Background>
@@ -36,6 +46,8 @@ export default function SignUp({ navigation }) {
             ref={nameRef}
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
           />
           <FormInput
             keyboardType="email-address"
@@ -45,6 +57,8 @@ export default function SignUp({ navigation }) {
             ref={emailRef}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
           />
           <FormInput
             secureTextEntry
@@ -52,6 +66,8 @@ export default function SignUp({ navigation }) {
             placeholder="Sua senha secreta"
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
           />
 
           <SubmitButton onPress={handleSubmit}>Criar conta</SubmitButton>
