@@ -13,8 +13,8 @@ const data = [1, 2, 3, 4, 5];
 export default function Dashboard() {
   return (
     <Background>
+      <Header />
       <Container>
-        <Header />
         <List
           data={data}
           keyExtractor={item => String(item)}

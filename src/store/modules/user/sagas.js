@@ -1,6 +1,6 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 // import { toast } from 'react-toastify';
-import { Alert } from 'react-redux';
+import { Alert } from 'react-native';
 import api from '~/services/api';
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 
@@ -24,7 +24,7 @@ export function* updateProfile({ payload }) {
   } catch (error) {
     const errorMessage =
       error.response && error.response.data && error.response.data.error
-        ? ['Erro', error.response.data.error]
+        ? ['Erro', error.response.data.error.toString()]
         : ['Erro ao atualizar perfil', 'Confira seus dados!'];
 
     Alert.alert(...errorMessage);
