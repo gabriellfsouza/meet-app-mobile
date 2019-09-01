@@ -1,8 +1,7 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
-// import { toast } from 'react-toastify';
+
 import { Alert } from 'react-native';
 
-// import history from '~/services/history';
 import api from '~/services/api';
 
 import { signInSuccess, signFailure, signUpSuccess } from './actions';
@@ -40,7 +39,6 @@ export function* signUp({ payload }) {
     });
 
     yield put(signUpSuccess());
-    // history.push('/');
   } catch (error) {
     Alert.alert('Falha no cadastro', 'Verifique seus dados.');
 
