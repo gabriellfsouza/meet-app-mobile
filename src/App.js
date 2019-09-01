@@ -1,12 +1,22 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import { StatusBar } from 'react-native';
+import createRouter from './routes';
 
-const App = () => {
+// import { Container } from './styles';
+
+export default function App() {
+  const signed = useSelector(state => state.auth.signed);
+
+  const Routes = createRouter(signed);
+
   return (
-    <View>
-      <Text>MeetApp</Text>
-    </View>
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={signed ? '#18161f' : '#22202d'}
+      />
+      <Routes />
+    </>
   );
-};
-
-export default App;
+}
